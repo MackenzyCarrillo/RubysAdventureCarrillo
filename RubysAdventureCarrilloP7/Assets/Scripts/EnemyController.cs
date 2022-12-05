@@ -11,8 +11,8 @@ public class EnemyController : MonoBehaviour
         Rigidbody2D rigidbody2d;
     float timer;
     int direction = 1;
-    
-    
+
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
