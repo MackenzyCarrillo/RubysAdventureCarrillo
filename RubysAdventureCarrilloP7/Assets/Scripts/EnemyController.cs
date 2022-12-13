@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D.IK;
+
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     public float changeTime = 3.0f;
 
     public ParticleSystem smokeEffect;
-    
+
     Rigidbody2D rigidbody2d;
     float timer;
     int direction = 1;
@@ -24,46 +24,46 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-   // Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
-        if(!broken)
+        if (!broken)
         {
             return;
         }
-        
+
         timer -= Time.deltaTime;
-         
+
         if (timer < 0)
         {
             direction = -direction;
             timer = changeTime;
         }
 
-    }
 
+    }
     void FixedUpdate()
     {
-      if(!broken)
-      {
+        if (!broken)
+        {
             return;
-      }
-        
+        }
+
         Vector2 position = rigidbody2d.position;
-       
-       if (vertical)
-       {
+
+        if (vertical)
+        {
             position.y = position.y + Time.deltaTime * speed * direction; ;
             animator.SetFloat("Move X", 0);
             animator.SetFloat("Move Y", direction);
-       }
+        }
         else
         {
             position.x = position.x + Time.deltaTime * speed * direction; ;
             animator.SetFloat("Move X", direction);
             animator.SetFloat("Move Y", 0);
         }
-        
+
 
         rigidbody2d.MovePosition(position);
     }
@@ -84,7 +84,7 @@ public class EnemyController : MonoBehaviour
         GetComponent<Rigidbody2D>().simulated = false;
         animator.SetTrigger("Fixed");
         smokeEffect.Stop();
+
+
     }
-
-
 }
