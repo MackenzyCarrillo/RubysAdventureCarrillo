@@ -12,7 +12,10 @@ public class RubyController : MonoBehaviour
     public GameObject projectilePrefab;    
     public int health { get { return currentHealth; } }
     int currentHealth;
-
+    public AudioClip throwSound;
+    public AudioClip hitSound;
+   
+    
     bool isInvincible;
     float invincibleTimer;
 
@@ -69,6 +72,7 @@ public class RubyController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.C))
         {
             Launch();
+
         }
     
          if(Input.GetKeyDown(KeyCode.X))
@@ -120,7 +124,7 @@ public class RubyController : MonoBehaviour
         Projectile projectile = projectileObject.GetComponent<Projectile>();
         projectile.Launch(lookDirection, 300);
         animator.SetTrigger("Launch");
-
+        PlaySound(throwSound);
     }
     
     
