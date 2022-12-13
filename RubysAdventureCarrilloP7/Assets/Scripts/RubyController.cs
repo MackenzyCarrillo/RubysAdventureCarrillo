@@ -21,14 +21,24 @@ public class RubyController : MonoBehaviour
     float vertical;
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
+
+    AudioSource audioSource;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
-
         currentHealth = maxHealth;
+        audioSource = GetComponent<AudioSource>();
     }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -67,7 +77,8 @@ public class RubyController : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, LayerMask.GetMask("NPC"));
                 if (hit.collider != null)
             {
-                Debug.Log("Raycast has hit the object" + hit.collider.gameObject);
+                NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
+                character.DisplayDialog();
             }
         }
                   
@@ -112,6 +123,8 @@ public class RubyController : MonoBehaviour
 
     }
     
+    
+
     
  
 }
